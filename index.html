@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday, My Love! 💖</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --pink: #ff9ec7;
+            --pink-light: #ffc2da;
+            --pink-dark: #ff6b9c;
+            --purple: #c77dff;
+            --purple-light: #e0aaff;
+            --purple-dark: #9d4edd;
+            --blue: #90e0ef;
+            --yellow: #ffd166;
+            --pastel: #f8f9fa;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            cursor: none;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #ffc2da, #e0aaff, #90e0ef);
+            min-height: 100vh;
+            overflow-x: hidden;
+            color: #5a189a;
+            position: relative;
+        }
+        
+        .cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: rgba(255, 158, 199, 0.7);
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 9999;
+            mix-blend-mode: difference;
+            transition: transform 0.1s;
+        }
+        
+        .cursor-trail {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 9998;
+            transition: transform 0.2s;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Header */
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .balloon {
+            position: absolute;
+            bottom: -50px;
+            width: 40px;
+            height: 50px;
+            border-radius: 50%;
+            opacity: 0;
+            z-index: -1;
+        }
+        
+        .header-content {
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(157, 78, 221, 0.2);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header-content::before {
+            content: "";
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: linear-gradient(45deg, var(--pink), var(--purple), var(--blue));
+            z-index: -1;
+            border-radius: 30px;
+        }
+        
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 4rem;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, var(--pink-dark), var(--purple-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .typing-container {
+            min-height: 80px;
+            margin-bottom: 20px;
+        }
+        
+        .typing-text {
+            font-size: 1.8rem;
+            display: inline-block;
+            border-right: 3px solid var(--pink-dark);
+            padding-right: 5px;
+            white-space: nowrap;
+            overflow: hidden;
+            animation: blink 0.75s step-end infinite;
+        }
+        
+        @keyframes blink {
+            from, to { border-color: transparent }
+            50% { border-color: var(--pink-dark) }
+        }
+        
+        /* Music Toggle */
+        .music-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            z-index: 100;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .music-toggle:hover {
+            transform: scale(1.1);
+            background: var(--pink-light);
+        }
+        
+        .music-toggle i {
+            font-size: 1.5rem;
+            color: var(--purple-dark);
+        }
+        
+        /* Love Reasons Section */
+        .reasons-section {
+            padding: 40px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-family: 'Dancing Script', cursive;
+            font-size: 3rem;
+            margin-bottom: 30px;
+            color: var(--purple-dark);
+        }
+        
+        .reasons-carousel {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            height: 400px;
+            perspective: 1000px;
+        }
+        
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            transition: transform 0.8s;
+        }
+        
+        .reason-card {
+            position: absolute;
+            width: 80%;
+            height: 80%;
+            top: 10%;
+            left: 10%;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 15px 35px rgba(157, 78, 221, 0.2);
+            backface-visibility: hidden;
+            transition: all 0.5s;
+            text-align: center;
+        }
+        
+        .reason-number {
+            font-size: 3rem;
+            color: var(--pink-dark);
+            margin-bottom: 15px;
+        }
+        
+        .reason-content {
+            font-size: 1.4rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .reason-icon {
+            font-size: 2.5rem;
+            color: var(--purple-dark);
+            margin-bottom: 15px;
+        }
+        
+        .carousel-nav {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+            gap: 15px;
+        }
+        
+        .nav-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+        }
+        
+        .nav-btn:hover {
+            background: var(--pink-light);
+            transform: translateY(-3px);
+        }
+        
+        /* Photo Gallery */
+        .gallery-section {
+            padding: 40px 0;
+        }
+        
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+        
+        .photo-item {
+            border-radius: 15px;
+            overflow: hidden;
+            height: 250px;
+            position: relative;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+        }
+        
+        .photo-item:hover {
+            transform: translateY(-10px) rotate(3deg);
+            box-shadow: 0 15px 30px rgba(157, 78, 221, 0.3);
+        }
+        
+        .photo-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .photo-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .photo-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(157, 78, 221, 0.8);
+            color: white;
+            padding: 10px;
+            transform: translateY(100%);
+            transition: transform 0.3s;
+            text-align: center;
+        }
+        
+        .photo-item:hover .photo-caption {
+            transform: translateY(0);
+        }
+        
+        /* Interactive Quiz */
+        .quiz-section {
+            padding: 40px 0;
+            text-align: center;
+        }
+        
+        .quiz-container {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 800px;
+            margin: 0 auto;
+            box-shadow: 0 15px 35px rgba(157, 78, 221, 0.2);
+        }
+        
+        .quiz-question {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .quiz-options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .quiz-option {
+            background: var(--pink-light);
+            padding: 15px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .quiz-option:hover {
+            background: var(--purple-light);
+            transform: translateY(-3px);
+        }
+        
+        .quiz-result {
+            font-size: 1.5rem;
+            min-height: 50px;
+            margin-top: 20px;
+            color: var(--purple-dark);
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            font-size: 1.2rem;
+            color: var(--purple-dark);
+        }
+        
+        .heart-pulse {
+            color: var(--pink-dark);
+            animation: pulse 1.5s infinite;
+            display: inline-block;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.3); }
+            100% { transform: scale(1); }
+        }
+        
+        /* Hidden Notes */
+        .hidden-note {
+            position: fixed;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            z-index: 10;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(5px);
+        }
+        
+        .hidden-note:hover {
+            transform: scale(1.2);
+            background: rgba(255, 158, 199, 0.5);
+        }
+        
+        .note-popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            max-width: 80%;
+            text-align: center;
+            display: none;
+        }
+        
+        .note-popup.show {
+            display: block;
+            animation: popIn 0.5s;
+        }
+        
+        @keyframes popIn {
+            from { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
+            to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+        }
+        
+        .note-close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--pink-dark);
+        }
+        
+        /* Confetti Effect */
+        .confetti {
+            position: fixed;
+            width: 15px;
+            height: 15px;
+            background: var(--pink);
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+            z-index: -1;
+            opacity: 0;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 { font-size: 3rem; }
+            .typing-text { font-size: 1.5rem; }
+            .reason-card { padding: 20px; }
+            .reason-content { font-size: 1.2rem; }
+            .quiz-options { grid-template-columns: 1fr; }
+            .photo-grid { grid-template-columns: 1fr; }
+        }
+        
+        @media (max-width: 480px) {
+            h1 { font-size: 2.5rem; }
+            .header-content { padding: 20px; }
+            .typing-container { min-height: 60px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+    <div class="cursor-trail"></div>
+    
+    <!-- Music Toggle -->
+    <div class="music-toggle" id="musicToggle">
+        <i class="fas fa-music"></i>
+    </div>
+    
+    <!-- Hidden Notes (Easter Eggs) -->
+    <div class="hidden-note" style="top: 20%; left: 15%;" data-note="Your smile makes my heart skip a beat!">
+        <i class="fas fa-heart"></i>
+    </div>
+    <div class="hidden-note" style="top: 40%; left: 85%;" data-note="I fall for you more every single day">
+        <i class="fas fa-star"></i>
+    </div>
+    <div class="hidden-note" style="top: 70%; left: 10%;" data-note="You're my favorite hello and hardest goodbye">
+        <i class="fas fa-moon"></i>
+    </div>
+    <div class="hidden-note" style="top: 85%; left: 90%;" data-note="I love you more than words can express">
+        <i class="fas fa-sun"></i>
+    </div>
+    
+    <!-- Note Popup -->
+    <div class="note-popup" id="notePopup">
+        <span class="note-close" id="noteClose">&times;</span>
+        <p id="noteContent"></p>
+    </div>
+    
+    <!-- Header with Typing Effect -->
+    <header>
+        <div class="header-content">
+            <h1>Happy Birthday!</h1>
+            <div class="typing-container">
+                <div class="typing-text" id="typingText"></div>
+            </div>
+            <p>To the most amazing girlfriend in the world!</p>
+        </div>
+    </header>
+    
+    <!-- Love Reasons Carousel -->
+    <section class="reasons-section">
+        <div class="container">
+            <h2 class="section-title">10 Reasons Why I Love You</h2>
+            <div class="reasons-carousel">
+                <div class="carousel-container" id="carousel">
+                    <!-- Cards will be generated by JS -->
+                </div>
+                <div class="carousel-nav">
+                    <div class="nav-btn" id="prevBtn">
+                        <i class="fas fa-arrow-left"></i>
+                    </div>
+                    <div class="nav-btn" id="nextBtn">
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Photo Gallery -->
+    <section class="gallery-section">
+        <div class="container">
+            <h2 class="section-title">Our Beautiful Memories</h2>
+            <div class="photo-grid">
+                <div class="photo-item">
+                    <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Happy moment">
+                    <div class="photo-caption">Our first date</div>
+                </div>
+                <div class="photo-item">
+                    <img src="https://images.unsplash.com/photo-1519699047748-de8e457a634e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=880&q=80" alt="Beach day">
+                    <div class="photo-caption">Beach sunset</div>
+                </div>
+                <div class="photo-item">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Adventure">
+                    <div class="photo-caption">Mountain adventure</div>
+                </div>
+                <div class="photo-item">
+                    <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Cozy night">
+                    <div class="photo-caption">Cozy night in</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Interactive Quiz -->
+    <section class="quiz-section">
+        <div class="container">
+            <h2 class="section-title">How Well Do You Know Me?</h2>
+            <div class="quiz-container">
+                <div class="quiz-question" id="question">What's my favorite color?</div>
+                <div class="quiz-options" id="options">
+                    <!-- Options will be populated by JS -->
+                </div>
+                <div class="quiz-result" id="quizResult"></div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>Made with <span class="heart-pulse">❤️</span> for the most special person in my life</p>
+            <p>I love you more than words can express!</p>
+        </div>
+    </footer>
+    
+    <!-- Audio Element -->
+    <audio id="backgroundMusic" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    </audio>
+    
+    <script>
+        // Custom cursor effect
+        const cursor = document.querySelector('.cursor');
+        const cursorTrail = document.querySelector('.cursor-trail');
+        let trailElements = [];
+        
+        document.addEventListener('mousemove', e => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            
+            // Create trail effect
+            const trail = document.createElement('div');
+            trail.className = 'cursor-trail';
+            trail.style.left = e.clientX + 'px';
+            trail.style.top = e.clientY + 'px';
+            document.body.appendChild(trail);
+            
+            trailElements.push(trail);
+            
+            // Remove oldest trail elements
+            if (trailElements.length > 15) {
+                const oldTrail = trailElements.shift();
+                oldTrail.remove();
+            }
+            
+            // Add sparkles occasionally
+            if (Math.random() > 0.7) {
+                createSparkle(e.clientX, e.clientY);
+            }
+        });
+        
+        function createSparkle(x, y) {
+            const sparkle = document.createElement('div');
+            sparkle.style.cssText = `
+                position: fixed;
+                width: 10px;
+                height: 10px;
+                background: white;
+                border-radius: 50%;
+                pointer-events: none;
+                z-index: 9999;
+                left: ${x}px;
+                top: ${y}px;
+                box-shadow: 0 0 10px 2px #ff9ec7;
+            `;
+            document.body.appendChild(sparkle);
+            
+            // Animate sparkle
+            const angle = Math.random() * Math.PI * 2;
+            const distance = 20 + Math.random() * 30;
+            const duration = 500 + Math.random() * 500;
+            
+            sparkle.animate([
+                { transform: 'translate(0, 0)', opacity: 1 },
+                { transform: `translate(${Math.cos(angle) * distance}px, ${Math.sin(angle) * distance}px)`, opacity: 0 }
+            ], {
+                duration: duration,
+                easing: 'ease-out',
+                fill: 'forwards'
+            });
+            
+            // Remove sparkle after animation
+            setTimeout(() => {
+                sparkle.remove();
+            }, duration);
+        }
+        
+        // Typing effect
+        const typingText = document.getElementById('typingText');
+        const messages = [
+            "Happy Birthday, my love!",
+            "You mean the world to me!",
+            "I cherish every moment with you!",
+            "You're the best thing that ever happened to me!"
+        ];
+        let messageIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        
+        function type() {
+            const currentMessage = messages[messageIndex];
+            
+            if (isDeleting) {
+                typingText.textContent = currentMessage.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typingText.textContent = currentMessage.substring(0, charIndex + 1);
+                charIndex++;
+            }
+            
+            if (!isDeleting && charIndex === currentMessage.length) {
+                // Pause at end of message
+                setTimeout(() => {
+                    isDeleting = true;
+                }, 2000);
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                messageIndex = (messageIndex + 1) % messages.length;
+            }
+            
+            const speed = isDeleting ? 50 : 100;
+            setTimeout(type, speed);
+        }
+        
+        // Start typing effect
+        setTimeout(type, 1000);
+        
+        // Balloon effect on click
+        document.addEventListener('click', (e) => {
+            createBalloon(e.clientX, e.clientY);
+        });
+        
+        function createBalloon(x, y) {
+            const balloon = document.createElement('div');
+            balloon.className = 'balloon';
+            balloon.style.left = x + 'px';
+            balloon.style.bottom = '0';
+            balloon.style.opacity = '1';
+            balloon.style.backgroundColor = getRandomColor();
+            document.body.appendChild(balloon);
+            
+            // Random balloon movement
+            const xMovement = (Math.random() - 0.5) * 2;
+            
+            balloon.animate([
+                { bottom: '0', opacity: 1 },
+                { bottom: '100vh', opacity: 0.5 }
+            ], {
+                duration: 5000,
+                easing: 'linear',
+                fill: 'forwards'
+            });
+            
+            // Remove after animation
+            setTimeout(() => {
+                balloon.remove();
+            }, 5000);
+        }
+        
+        function getRandomColor() {
+            const colors = ['#ff9ec7', '#ffc2da', '#c77dff', '#e0aaff', '#90e0ef', '#ffd166'];
+            return colors[Math.floor(Math.random() * colors.length)];
+        }
+        
+        // Confetti effect on scroll
+        let lastScrollY = 0;
+        
+        window.addEventListener('scroll', () => {
+            const scrollY = window.scrollY;
+            const scrollDelta = scrollY - lastScrollY;
+            
+            if (scrollDelta > 5) {
+                createConfetti();
+            }
+            
+            lastScrollY = scrollY;
+        });
+        
+        function createConfetti() {
+            const confetti = document.createElement('div');
+            confetti.className = 'confetti';
+            confetti.style.left = Math.random() * 100 + 'vw';
+            confetti.style.top = window.scrollY + 'px';
+            confetti.style.backgroundColor = getRandomColor();
+            confetti.style.transform = `scale(${0.5 + Math.random()}) rotate(${Math.random() * 360}deg)`;
+            document.body.appendChild(confetti);
+            
+            // Animate confetti
+            const animation = confetti.animate([
+                { top: window.scrollY + 'px', opacity: 1 },
+                { top: window.scrollY + 200 + 'px', opacity: 0 }
+            ], {
+                duration: 1500 + Math.random() * 1000,
+                easing: 'ease-out'
+            });
+            
+            animation.onfinish = () => {
+                confetti.remove();
+            };
+        }
+        
+        // Hidden notes functionality
+        const noteTriggers = document.querySelectorAll('.hidden-note');
+        const notePopup = document.getElementById('notePopup');
+        const noteContent = document.getElementById('noteContent');
+        const noteClose = document.getElementById('noteClose');
+        
+        noteTriggers.forEach(trigger => {
+            trigger.addEventListener('click', () => {
+                noteContent.textContent = trigger.dataset.note;
+                notePopup.classList.add('show');
+            });
+        });
+        
+        noteClose.addEventListener('click', () => {
+            notePopup.classList.remove('show');
+        });
+        
+        // Music toggle
+        const musicToggle = document.getElementById('musicToggle');
+        const backgroundMusic = document.getElementById('backgroundMusic');
+        let musicPlaying = false;
+        
+        musicToggle.addEventListener('click', () => {
+            if (musicPlaying) {
+                backgroundMusic.pause();
+                musicToggle.innerHTML = '<i class="fas fa-music"></i>';
+            } else {
+                backgroundMusic.play().catch(e => console.log("Audio play failed:", e));
+                musicToggle.innerHTML = '<i class="fas fa-pause"></i>';
+            }
+            musicPlaying = !musicPlaying;
+        });
+        
+        // Love reasons carousel
+        const reasons = [
+            { icon: 'fa-heart', content: "Your smile brightens my darkest days" },
+            { icon: 'fa-star', content: "Your kindness touches everyone around you" },
+            { icon: 'fa-moon', content: "The way you look at me makes me feel special" },
+            { icon: 'fa-sun', content: "Your passion for life is contagious" },
+            { icon: 'fa-laugh', content: "Your sense of humor always makes me laugh" },
+            { icon: 'fa-hand-holding-heart', content: "You support me through everything" },
+            { icon: 'fa-music', content: "Your voice is my favorite sound" },
+            { icon: 'fa-book', content: "Your intelligence constantly impresses me" },
+            { icon: 'fa-cookie', content: "The way you care for others inspires me" },
+            { icon: 'fa-infinity', content: "You make me want to be a better person" }
+        ];
+        
+        const carousel = document.getElementById('carousel');
+        let currentCard = 0;
+        
+        // Generate cards
+        reasons.forEach((reason, index) => {
+            const card = document.createElement('div');
+            card.className = 'reason-card';
+            card.style.transform = `rotateY(${index * 36}deg) translateZ(300px)`;
+            
+            card.innerHTML = `
+                <div class="reason-number">${index + 1}</div>
+                <div class="reason-icon"><i class="fas ${reason.icon}"></i></div>
+                <div class="reason-content">${reason.content}</div>
+            `;
+            
+            carousel.appendChild(card);
+        });
+        
+        // Navigation
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        
+        function rotateCarousel() {
+            carousel.style.transform = `rotateY(${currentCard * -36}deg)`;
+        }
+        
+        prevBtn.addEventListener('click', () => {
+            currentCard = (currentCard - 1 + reasons.length) % reasons.length;
+            rotateCarousel();
+        });
+        
+        nextBtn.addEventListener('click', () => {
+            currentCard = (currentCard + 1) % reasons.length;
+            rotateCarousel();
+        });
+        
+        // Interactive quiz
+        const quizQuestions = [
+            {
+                question: "What's my favorite color?",
+                options: ["Pink", "Purple", "Blue", "Green"],
+                answer: 1 // Purple
+            },
+            {
+                question: "Where did we have our first date?",
+                options: ["Coffee shop", "Italian restaurant", "Park", "Movie theater"],
+                answer: 2 // Park
+            },
+            {
+                question: "What's my dream vacation?",
+                options: ["Paris", "Bali", "Santorini", "Tokyo"],
+                answer: 2 // Santorini
+            }
+        ];
+        
+        let currentQuestion = 0;
+        const questionEl = document.getElementById('question');
+        const optionsEl = document.getElementById('options');
+        const quizResult = document.getElementById('quizResult');
+        
+        function loadQuestion() {
+            const q = quizQuestions[currentQuestion];
+            questionEl.textContent = q.question;
+            optionsEl.innerHTML = '';
+            
+            q.options.forEach((option, index) => {
+                const optionEl = document.createElement('div');
+                optionEl.className = 'quiz-option';
+                optionEl.textContent = option;
+                optionEl.dataset.index = index;
+                optionEl.addEventListener('click', checkAnswer);
+                optionsEl.appendChild(optionEl);
+            });
+            
+            quizResult.textContent = '';
+        }
+        
+        function checkAnswer(e) {
+            const selectedIndex = parseInt(e.target.dataset.index);
+            const correctIndex = quizQuestions[currentQuestion].answer;
+            
+            if (selectedIndex === correctIndex) {
+                quizResult.textContent = "Correct! You know me so well! 💖";
+                quizResult.style.color = "#9d4edd";
+                
+                // Create floating hearts
+                for (let i = 0; i < 5; i++) {
+                    createFloatingHeart();
+                }
+            } else {
+                quizResult.textContent = "Almost! The correct answer was: " + 
+                    quizQuestions[currentQuestion].options[correctIndex];
+                quizResult.style.color = "#ff6b9c";
+            }
+            
+            // Move to next question
+            setTimeout(() => {
+                currentQuestion = (currentQuestion + 1) % quizQuestions.length;
+                loadQuestion();
+            }, 3000);
+        }
+        
+        function createFloatingHeart() {
+            const heart = document.createElement('div');
+            heart.innerHTML = '<i class="fas fa-heart"></i>';
+            heart.style.position = 'fixed';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.top = '100vh';
+            heart.style.fontSize = (20 + Math.random() * 30) + 'px';
+            heart.style.color = getRandomColor();
+            heart.style.zIndex = '1000';
+            heart.style.pointerEvents = 'none';
+            document.body.appendChild(heart);
+            
+            // Animate heart floating up
+            const animation = heart.animate([
+                { top: '100vh', opacity: 1 },
+                { top: '-100px', opacity: 0 }
+            ], {
+                duration: 2000 + Math.random() * 3000,
+                easing: 'ease-in'
+            });
+            
+            animation.onfinish = () => {
+                heart.remove();
+            };
+        }
+        
+        // Initialize
+        rotateCarousel();
+        loadQuestion();
+        
+        // Start with some balloons
+        for (let i = 0; i < 5; i++) {
+            setTimeout(() => {
+                createBalloon(Math.random() * window.innerWidth, window.innerHeight);
+            }, i * 300);
+        }
+    </script>
+</body>
+</html>
